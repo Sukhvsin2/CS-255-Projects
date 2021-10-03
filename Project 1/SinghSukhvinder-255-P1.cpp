@@ -1,4 +1,5 @@
 #include<iostream>
+#include<cstdlib>
 #include"Fraction.h"
 
 using namespace std;
@@ -86,16 +87,25 @@ void operations(int o, Fraction &f1, Fraction &f2){
 	}
 }
 
-int main(){
-	Fraction f1, f2;
-	int o, ex=1;
+void randFraction(Fraction &f1){
+	f1.SetNum(rand() % 100 + 1);
+	f1.SetDen(rand() % 100 + 1);
+}
+
+void fractionCalculator(int &ex, char &sel, Fraction &f1, Fraction &f2, int &o){
 	cout<<"***** Fraction Calculator *****"<<endl;
 	options();
 	
-	
 	while(ex){
-		cout<<"Enter your First Fraction: ";
-		cin>>f1;
+		cout<<"You wanna select a random fraction? Y or N: ";
+		cin>>sel;
+		if(sel == 'y' || sel == 'Y'){
+			randFraction(f1);
+			cout<<"Random Fraction: "<<f1.GetNum()<<"/"<<f1.GetDen()<<endl;
+		}else{
+			cout<<"Enter your First Fraction: ";
+			cin>>f1;
+		}
 		cout<<"Choose Option: ";
 		cin>>o;
 		if(o != 12 && o != 13 && o != 0){
@@ -103,8 +113,29 @@ int main(){
 			cin>>f2;
 		}
 		operations(o, f1, f2);
-		cout<<endl<<"Want to calculate more?: 1 for Yes & 0 for No: ";
+		cout<<endl<<"Want to calculate more?: Y/y or N/n: ";
 		cin>>ex;
+		if(ex == 'N' || ex == 'n') ex = 0;
 	}
-	cout<<endl<<"Thank you!"<<endl;
+}
+
+void programEnd(){
+	switch(rand()%3 + 1){
+		case 1:		
+			cout<<endl<<"Learning is Fun!!!"<<endl;
+			break;
+		case 2:
+			cout<<endl<<"Thank you!"<<endl;
+			break;
+		case 3:
+			cout<<endl<<"Have a Great Day!"<<endl;
+	}
+}
+
+int main(){
+	Fraction f1, f2;
+	int o, ex=1;
+	char sel;
+	fractionCalculator(ex, sel, f1, f2, o);
+	programEnd();
 }
