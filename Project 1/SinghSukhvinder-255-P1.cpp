@@ -5,7 +5,8 @@
 using namespace std;
 
 void options(){
-	cout<<"Options: "<<endl;
+	cout<<"***** Fraction Calculator *****"<<endl;
+	cout<<"Operations: "<<endl;
 	cout<<"0. Exit"<<endl;
 	cout<<"1. +"<<endl;
 	cout<<"2. -"<<endl;
@@ -93,7 +94,7 @@ void randFraction(Fraction &f1){
 }
 
 void fractionCalculator(int &ex, char &sel, Fraction &f1, Fraction &f2, int &o){
-	cout<<"***** Fraction Calculator *****"<<endl;
+	
 	options();
 	
 	while(ex){
