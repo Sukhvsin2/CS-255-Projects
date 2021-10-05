@@ -14,8 +14,8 @@ void options(){
 	cout<<"4. /"<<endl;
 	cout<<"5. isExact: =="<<endl;
 	cout<<"6. =="<<endl;
-	cout<<"7. <"<<endl;
-	cout<<"8. >"<<endl;
+	cout<<"7. >"<<endl;
+	cout<<"8. <"<<endl;
 	cout<<"9. <="<<endl;
 	cout<<"10. >="<<endl;
 	cout<<"11. !="<<endl;
@@ -24,22 +24,30 @@ void options(){
 }
 
 void operations(int o, Fraction &f1, Fraction &f2){
+	Fraction temp;
 	switch(o){
 		case 0: 
 			break;
 		case 1:
+			temp = f1+f2;
+			temp.reduce();
 			cout<<"case +: "<<f1+f2;
 			break;
-
 		case 2:
+			temp = f1-f2;
+			temp.reduce();
 			cout<<"case -: "<<f1-f2;
 			break;
 			
 		case 3:
+			temp = f1*f2;
+			temp.reduce();
 			cout<<"case *: "<<f1*f2;
 			break;
 			
 		case 4:
+			temp = f1/f2;
+			temp.reduce();
 			cout<<"case /: "<<f1/f2;
 			break;
 		
@@ -73,11 +81,15 @@ void operations(int o, Fraction &f1, Fraction &f2){
 			
 		case 12:
 			f1++;
+			temp = f1;
+			temp.reduce();
 			cout<<"Case ++: "<<f1;
 			break;
 			
 		case 13:
 			f1--;
+			temp = f1;
+			temp.reduce();
 			cout<<"Case --: "<<f1;
 			break;
 			
@@ -86,6 +98,7 @@ void operations(int o, Fraction &f1, Fraction &f2){
 			cout<<"Error: Choose atleast one operation : +, -, *, /...!";
 			break;
 	}
+	!temp.GetNum() ? "" : cout<<"\nReduced Fraction: "<<temp<<endl;
 }
 
 void randFraction(Fraction &f1){
@@ -96,8 +109,8 @@ void randFraction(Fraction &f1){
 void fractionCalculator(int &ex, char &sel, Fraction &f1, Fraction &f2, int &o){
 	
 	options();
-	
-	while(ex){
+	bool counter = true;
+	while(counter){
 		cout<<"You wanna select a random fraction? Y or N: ";
 		cin>>sel;
 		if(sel == 'y' || sel == 'Y'){
@@ -116,7 +129,8 @@ void fractionCalculator(int &ex, char &sel, Fraction &f1, Fraction &f2, int &o){
 		operations(o, f1, f2);
 		cout<<endl<<"Want to calculate more?: Y/y or N/n: ";
 		cin>>ex;
-		if(ex == 'N' || ex == 'n') ex = 0;
+		if(ex == 'N' || ex == 'n') counter = false;
+		else counter = true;
 	}
 }
 
