@@ -1,8 +1,87 @@
+/**
+	Name: Sukhvinder Singh
+	Purpose: Fraction Calculator which can perform various operations just like a Normal Calculator but for fractions.
+		At the program start it'll give you all the options which you can perform on any fraction after selecting.
+		System will give you option to choose fraction randomly or could input at runtime, after that you could 
+		enter value or get result according to whatever operation you choose. 
+	Date: 10/5/21
+	
+**/
+
 #include<iostream>
+// For random number rand()
 #include<cstdlib>
+// For Including fraction class and methods
 #include"Fraction.h"
 
 using namespace std;
+
+/**
+	Name: Options
+	Return: None
+	Outgoing: None
+	Incoming: None
+	Purpose: Printing/Displaying Options of the calculator
+**/
+void options();
+/**
+	Name: Operations
+	Return Value: None
+	Incoming Parameters: O for option that user chooses, f1 as in first fraction object which 
+		is passed by reference to use the memory efficiently, f2 as in second fraction object which
+		is passed by reference to use the memory efficiently.
+	Outgoing Parameters: f1 & f2 because whatever operation 
+		performed on those objects it going to affect the real objects in the main body as they are passed by reference.
+	Purpose: This function is used to perform actions/operations choose by the user and call function from the Fraction 
+		Class which is imported at the top of the file.
+**/
+void operations(int, Fraction&, Fraction&);
+/**
+	Name: RandFraction
+	Return: None
+	Income Parameters: Object of Fraction by reference, which going to be generated and 
+		set the value of Numerator and Denominator. And it would does affect that object 
+		in main body also because of passing it by reference. 
+	Outgoing Parameters: Setting new Num & Den for an object generated randomly.
+	Purpose: By this function system is creating a random fraction to perform 
+		operations on it, which would be only called if user chooses Yes or y 
+		to generate a fraction randomly or it will not call
+**/
+void randFraction(Fraction&);
+
+/**
+	Name: FractionCalculator
+	Return: None
+	Incoming: loop controller named ex, sel for selcting options and random variable, objects as f1,f2, 
+		o for choosing options in the list
+	Outgoing: Just changing in those passed by reference variables acc. to conditions.
+	Purpose: It controls the flow of calcultor by choosing options and making decisons which function to 
+		call at what time.
+**/
+
+void fractionCalculator(char&, char&, Fraction&, Fraction&, int&);
+/**
+	Name: ProgramEnd
+	Return: None
+	Incoming: None
+	Outgoing: None
+	Purpose: Just display 3 types of messages choosed according to the random number at runtime.
+**/
+void programEnd();
+
+int main(){
+	// Object initialized
+	Fraction f1, f2;
+	int o;
+	char sel, ex;
+	// Calculator function called
+	fractionCalculator(ex, sel, f1, f2, o);
+	// Program end function called at end
+	programEnd();
+	
+	return 0;
+}
+
 
 void options(){
 	cout<<"***** Fraction Calculator *****"<<endl;
@@ -22,6 +101,7 @@ void options(){
 	cout<<"12. ++"<<endl;
 	cout<<"13. --"<<endl;
 }
+
 
 void operations(int o, Fraction &f1, Fraction &f2){
 	Fraction temp;
@@ -101,12 +181,14 @@ void operations(int o, Fraction &f1, Fraction &f2){
 	!temp.GetNum() ? "" : cout<<"\nReduced Fraction: "<<temp<<endl;
 }
 
+
 void randFraction(Fraction &f1){
 	f1.SetNum(rand() % 100 + 1);
 	f1.SetDen(rand() % 100 + 1);
 }
 
-void fractionCalculator(int &ex, char &sel, Fraction &f1, Fraction &f2, int &o){
+
+void fractionCalculator(char &ex, char &sel, Fraction &f1, Fraction &f2, int &o){
 	
 	options();
 	bool counter = true;
@@ -147,10 +229,3 @@ void programEnd(){
 	}
 }
 
-int main(){
-	Fraction f1, f2;
-	int o, ex=1;
-	char sel;
-	fractionCalculator(ex, sel, f1, f2, o);
-	programEnd();
-}
