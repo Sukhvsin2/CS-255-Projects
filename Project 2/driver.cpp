@@ -62,7 +62,7 @@ int main(){
 	return 0;
 }
 
-void testConstructor(ostream&os){
+void testConstructor(ostream &os){
 	os<< "TESTING CONSTRUCTOR" << endl;
 	os<< "EXPECT:\t" << "<>" << endl;	
 	Poly p;

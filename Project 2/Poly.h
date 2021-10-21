@@ -22,8 +22,4 @@ public:
 	friend Poly operator*(const Poly& p1, const Poly& p2);
 };
 
-Poly::Poly(){
-	for(int i=0;i<MAX;i++) terms[i] = 0;
-}
-
 #endif
