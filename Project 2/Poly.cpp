@@ -5,14 +5,21 @@ Poly:: Poly(){
 }
 
 ostream& operator<<(ostream &os,const Poly &obj){
-	for(int i=0;i<MAX;i++) {
-		os<<obj.terms[i]<<" ";	
+	for(int i=MAX-1;i>=0;i--) {
+		//if(obj.terms[i] != 0){
+			if(i > 0) os<<obj.terms[i]<<"x^"<<i<<" + ";
+			else os<<obj.terms[i]<<"x";
+	//	}
 	}
 	return os;
 }
 
-istream& operator>>(istream &is,Poly &obj){
-	for(int i=0;i<MAX;i++) is>>obj.terms[i];
+istream& operator>>(istream& is, Poly& obj){
+	int coff, temp, pow;
+	for(int j=0;j<MAX;j++) {
+		is>>coff>>temp>>pow;
+		obj.terms[pow] = coff;
+	}
 	return is;
 }
 
@@ -51,5 +58,8 @@ void Poly:: operator+=(const Poly& p){
 }
 
 void Poly:: Derivative(){
-	
+	for(int i=0;i<MAX;i++){
+		if (i == 0)this->terms[0] *= 1;
+		else this->terms[0] *= i;
+	}
 }
