@@ -1,15 +1,11 @@
 // driver.cpp
 // Dr. Janet T. Jenkins 
 // This is a sample driver program
-// Before it is really helpful, you will need to
-// have the insertion and extraction operators working
-// DO NOT START CODING ANYTHING UNTIL
-// THE CONSTRUCTOR METHOD, INPUT AND OUTPUT OPERATORS
-// ARE WORKING CORRECTLY
 
 // Feel free to change this main program as you wish.
 // You may find it easier to use to read polynomials 
 // from a file rather than from standard input
+// Files have been included in this project
 
 #include "Poly.h"
 #include <iostream>
@@ -21,9 +17,8 @@ void testInput(istream&, ostream&);
 void testReset(istream&, ostream&);
 void testEvaluate(istream&, ostream&);
 void testAdd(istream&, ostream&);
-void testMult(istream&, ostream&);
-void testPlusEqual(istream&, ostream&);
 void testDerivative(istream&, ostream&);
+void testCopy(istream&, ostream&);
 
 
 int getChoice();
@@ -36,19 +31,22 @@ int main(){
 	ifstream mult("mult.txt");
 	ifstream plusE("pluse.txt");
 	ifstream deriv("deriv.txt");
+
 	int choice = getChoice();
 	while(choice){
 		system("cls");
 		switch (choice){
+			
 			case 1: testConstructor(cout);break;
 			case 2: testInput(input,cout); break;
 			case 3: cout << "Tested in other methods" ; break;
             case 4: testReset(reset,cout); break;
 			case 5: testEvaluate(eval,cout); break;
 			case 6: testAdd(add,cout); break;
-			case 7: testMult(mult,cout); break;
-			case 8: testPlusEqual(plusE,cout); break;
-			case 9: testDerivative(deriv,cout); break;
+			case 7: testDerivative(deriv,cout); break;
+            case 8: cout << "Tested in other methods" ; break;
+            //add your own cases for testing copy constructor and assignment  
+			case 9: testCopy(input, cout); break;         
 			default: cout << "invalid selection" << endl;
 		}
 		cout << "Press Enter to Continue" << endl;
@@ -60,7 +58,18 @@ int main(){
 	return 0;
 }
 
-void testConstructor(ostream &os){
+void testCopy(istream& is, ostream& os){
+	cout<<"Copy Constructor: \n";
+	Poly p, p1;
+	is>>p;
+	p1 = p;
+	p.AddTerm(1,1);
+	os<<"\nPrint result P1: ";
+	os<<p1<<endl;
+	os<<"Print Result P after adding (1,1): "<<p<<endl;
+}
+
+void testConstructor(ostream&os){
 	os<< "TESTING CONSTRUCTOR" << endl;
 	os<< "EXPECT:\t" << "<>" << endl;	
 	Poly p;
@@ -108,27 +117,8 @@ void testAdd(istream& is, ostream&os){
 	os<< p1 + p2 << endl;
 	
 }
-void testMult(istream& is, ostream&os){
-	os<< "TESTING MULTIPLY" << endl;
-	Poly p1, p2;
-	os<< "Enter Left Operand" << endl;
-	is>> p1;
-	os<< "Enter Right Operand " << endl;	
-	is>> p2;
-	os<< p1 << " * " << p2 << "=" << endl;
-	os<< p1 * p2 << endl;
-}
-void testPlusEqual(istream& is, ostream&os){
-	os<< "TESTING PLUS EQUAL" << endl;
-	Poly p1, p2;
-	os<< "Enter Left Operand" << endl;
-	is>> p1;
-	os<< "Enter Right Operand " << endl;	
-	is>> p2;
-	os<< p1 << " += " << p2 << "=" << endl;
-	p1+=p2;
-	os<< p1 << endl;
-}
+
+
 void testDerivative(istream& is, ostream&os){
 	os<< "TESTING DERIVATIVE" << endl;
 	Poly p1;
@@ -140,6 +130,7 @@ void testDerivative(istream& is, ostream&os){
 }
 
 
+
 int getChoice(){
 	cout << "Select one" << endl;
 	cout << "1. Test Constructor" << endl;
@@ -148,12 +139,10 @@ int getChoice(){
 	cout << "4. Test Reset " << endl;
 	cout << "5. Test Evaluate " << endl;
 	cout << "6. TestAdd" << endl;
-	cout << "7. TestMult" << endl;
-	cout << "8. TestPlusEqual" << endl;
-    cout << "9. TestDerivative" << endl;
+	cout << "7. TestDerivative" << endl;
+    cout << "8. Test Add Term" << endl;
 	cout << "0. Quit" << endl;
 	int c;
 	cin >> c;
 	return c;
 }
-
