@@ -141,6 +141,7 @@ int getChoice(){
 	cout << "6. TestAdd" << endl;
 	cout << "7. TestDerivative" << endl;
     cout << "8. Test Add Term" << endl;
+    cout << "9. Copy Constructor" << endl;
 	cout << "0. Quit" << endl;
 	int c;
 	cin >> c;
